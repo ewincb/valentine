@@ -9,51 +9,80 @@
 <style>
 *{box-sizing:border-box;font-family:'Pacifico',cursive}
 
-/* BODY */
+/* ================= BODY ================= */
 body{
 margin:0;height:100vh;
 display:flex;justify-content:center;align-items:center;
 background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
-overflow:hidden;transition:1s;
+overflow:hidden;
+transition:1s;
 }
 body.dim{
-filter:brightness(.55);
+filter:blur(2px) brightness(.6);
 }
 body.proposal{
-background:radial-gradient(circle at top,#ff9aaf,#ff4d9d,#2b0a1f);
 filter:none;
+background:radial-gradient(circle at top,#ff9aaf,#ff4d9d,#2b0a1f);
 }
 
-/* ============ ENVELOPE OPENING ============ */
+/* VIGNETTE */
+body::after{
+content:"";
+position:fixed;inset:0;
+pointer-events:none;
+box-shadow:inset 0 0 120px rgba(0,0,0,.45);
+z-index:2;
+}
+
+/* ================= SAKURA ================= */
+.sakura{
+position:fixed;
+top:-20px;
+font-size:18px;
+pointer-events:none;
+animation:fall linear forwards;
+opacity:.9;
+}
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* ================= ENVELOPE ================= */
 #envelope{
 position:fixed;inset:0;
 display:flex;justify-content:center;align-items:center;
-background:rgba(0,0,0,.35);
+background:rgba(0,0,0,.25);
 z-index:10;
-transition:.8s;
 }
 
 .envelope{
-width:300px;height:200px;
+width:320px;height:210px;
 position:relative;
 cursor:pointer;
-perspective:900px;
+perspective:1000px;
 animation:float 2s infinite alternate;
+filter:drop-shadow(0 15px 35px rgba(0,0,0,.35));
 }
 
 /* GLOW */
 .envelope:hover,
 .envelope:active{
-filter:drop-shadow(0 0 18px #ff4d9d)
-       drop-shadow(0 0 45px #ff7eb3);
+filter:
+drop-shadow(0 0 20px #ff4d9d)
+drop-shadow(0 0 50px #ff7eb3);
 }
 
 /* BACK */
 .envelope .back{
 position:absolute;inset:0;
-background:#fff;
-border-radius:14px;
-box-shadow:0 20px 40px rgba(0,0,0,.25);
+background:linear-gradient(145deg,#fff,#f1f1f1);
+border-radius:18px;
+box-shadow:
+inset 0 4px 8px rgba(255,255,255,.9),
+inset 0 -6px 10px rgba(0,0,0,.12);
 }
 
 /* FLAP */
@@ -61,58 +90,53 @@ box-shadow:0 20px 40px rgba(0,0,0,.25);
 position:absolute;
 top:0;left:0;
 width:100%;height:100%;
-background:#ffcad4;
-clip-path:polygon(0 0,100% 0,50% 55%);
+background:linear-gradient(145deg,#ffcad4,#ff9ab3);
+clip-path:polygon(0 0,100% 0,50% 60%);
 transform-origin:top;
 transition:1s;
-border-radius:14px;
+border-radius:18px;
+box-shadow:inset 0 -4px 6px rgba(0,0,0,.15);
+}
+
+/* TEXT ON ENVELOPE */
+.envelope .label{
+position:absolute;
+bottom:55px;
+width:100%;
+text-align:center;
+font-size:1.4rem;
+color:#ff4d6d;
+pointer-events:none;
+transition:.5s;
 }
 
 /* LETTER */
 .envelope .letter{
 position:absolute;
-left:10px;right:10px;bottom:10px;
+left:14px;right:14px;bottom:14px;
 height:160px;
 background:#fff;
-border-radius:10px;
+border-radius:14px;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
-font-size:1.3rem;
-color:#ff4d6d;
 padding:15px;
+font-size:1.25rem;
+color:#ff4d6d;
 transform:translateY(70px);
 transition:1s;
 }
 
 /* OPEN */
-.envelope.open .flap{
-transform:rotateX(180deg);
-}
-.envelope.open .letter{
-transform:translateY(-120px);
-}
+.envelope.open .flap{transform:rotateX(180deg)}
+.envelope.open .letter{transform:translateY(-130px)}
+.envelope.open .label{opacity:0}
 
 @keyframes float{to{transform:translateY(-12px)}}
-
-/* HIDE */
 .hide{opacity:0;pointer-events:none}
 
-/* ============ BURST EFFECTS ============ */
-.burst{
-position:fixed;
-pointer-events:none;
-font-size:22px;
-animation:burst 1.2s ease forwards;
-}
-
-@keyframes burst{
-0%{transform:scale(.2) translateY(0);opacity:1}
-100%{transform:scale(1.6) translateY(-120px);opacity:0}
-}
-
-/* ============ MAIN ============ */
+/* ================= MAIN ================= */
 .container{display:none;text-align:center;padding:20px;max-width:360px;color:#ff4d6d}
 h1{font-size:2.2rem}
 h2{font-size:1.1rem;margin-bottom:15px}
@@ -145,7 +169,7 @@ margin-top:25px;
 font-size:1.8rem;
 color:#fff;
 animation:pulse 1.5s infinite;
-text-shadow:0 0 10px #ff9ad5,0 0 25px #ff4d9d,0 0 45px #ff1f8f;
+text-shadow:0 0 12px #ff9ad5,0 0 30px #ff4d9d;
 }
 @keyframes pulse{
 0%{transform:scale(1)}
@@ -168,18 +192,17 @@ padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
   <div class="envelope" id="openEnvelope">
     <div class="back"></div>
     <div class="flap"></div>
+    <div class="label">💌 Open Invitation</div>
     <div class="letter" id="letter"
-      data-text="This little letter is only for you 💖">
+      data-text="This invitation is written only for you 💖">
     </div>
   </div>
 </div>
 
-<!-- MUSIC -->
 <audio id="bgMusic" loop>
   <source src="assets/music/love.mp3" type="audio/mpeg">
 </audio>
 
-<!-- MAIN -->
 <div class="container" id="main">
 <h1>Will You Be My Valentine?</h1>
 <h2>My Gemoyyy 😈💗</h2>
@@ -207,40 +230,38 @@ padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
 const HER_NAME="Novi Sayanggg";
 const WA_NUMBER="6282190109525";
 
+/* iOS SOFT HAPTIC */
+function softHaptic(){
+if(navigator.vibrate) navigator.vibrate(20);
+}
+
 /* TYPING */
-function typeText(el,text,speed=45){
+function typeText(el,text){
 el.innerHTML="";
 let i=0;
 const t=setInterval(()=>{
 el.innerHTML+=text.charAt(i);
 i++;
 if(i>=text.length) clearInterval(t);
-},speed);
+},45);
 }
 
-/* BURST (HEART + PETAL) */
-function burst(x,y){
-const icons=["💖","🌸","🌷","🌺"];
-for(let i=0;i<14;i++){
-const b=document.createElement("div");
-b.className="burst";
-b.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-b.style.left=x+Math.random()*50-25+"px";
-b.style.top=y+Math.random()*30-15+"px";
-document.body.appendChild(b);
-setTimeout(()=>b.remove(),1200);
-}
-}
+/* SAKURA FALL */
+setInterval(()=>{
+const s=document.createElement("div");
+s.className="sakura";
+s.innerHTML=["🌸","🌺","🌷"][Math.floor(Math.random()*3)];
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=6+Math.random()*4+"s";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),10000);
+},400);
 
-/* OPEN ENVELOPE */
+/* OPEN */
 openEnvelope.onclick=()=>{
-if(navigator.vibrate) navigator.vibrate([40,30,40]);
-
+softHaptic();
 openEnvelope.classList.add("open");
 typeText(letter,letter.dataset.text);
-
-const r=openEnvelope.getBoundingClientRect();
-burst(r.left+r.width/2,r.top+r.height/2);
 
 setTimeout(()=>envelope.classList.add("hide"),1600);
 setTimeout(()=>{
@@ -250,7 +271,7 @@ bgMusic.play();
 },2000);
 };
 
-/* SLIDESHOW */
+/* SLIDE */
 let i=0;
 setInterval(()=>{
 const s=document.querySelectorAll(".slideshow img");
