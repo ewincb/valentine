@@ -5,65 +5,133 @@
 <title>Valentine Surprise 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box;font-family:'Pacifico',cursive}
+
 body{
 margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
-overflow:hidden;background:linear-gradient(135deg,#ffd1dc,#ffe6f0);transition:.5s;}
+overflow:hidden;background:linear-gradient(135deg,#ffd1dc,#ffe6f0);transition:.5s;
+}
+
 .dark{background:linear-gradient(135deg,#2b0a1f,#000)}
-.container{text-align:center;padding:20px;max-width:360px;color:#ff4d6d}
+
+.container{
+text-align:center;padding:20px;max-width:360px;color:#ff4d6d
+}
+
 .dark .container{color:#ffb6c1}
+
 h1{font-size:2.2rem;text-shadow:0 0 10px rgba(255,77,157,.4)}
 h2{font-size:1.1rem;margin-bottom:10px}
+
 #countdown{font-size:1rem;margin-bottom:15px}
-.slideshow{width:100%;height:200px;border-radius:20px;overflow:hidden;margin-bottom:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);}
+
+.slideshow{
+width:100%;height:200px;border-radius:20px;overflow:hidden;margin-bottom:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.15)
+}
+
 .slideshow img{width:100%;height:100%;object-fit:cover;display:none}
 .slideshow img.active{display:block}
-.buttons{position:relative;height:130px}
-button{border:none;border-radius:50px;padding:14px 28px;font-size:1.2rem;cursor:pointer}
-#yesBtn{background:#ff4d9d;color:#fff;box-shadow:0 8px 20px rgba(255,77,157,.4)}
-#noBtn{background:#fff;color:#ff4d6d;position:absolute;left:50%;top:65px;transform:translateX(-50%)}
-.message{display:none;font-size:1.5rem;margin-top:20px;animation:pop .6s ease forwards}
+
+#musicBtn{
+background:#ff8fab;color:white;border:none;border-radius:30px;
+padding:10px 22px;font-size:1rem;margin-bottom:15px;
+box-shadow:0 6px 15px rgba(255,143,171,.4)
+}
+
+.buttons{position:relative;height:140px}
+
+button{
+border:none;border-radius:50px;padding:14px 28px;
+font-size:1.2rem;cursor:pointer
+}
+
+#yesBtn{
+background:#ff4d9d;color:#fff;
+box-shadow:0 8px 20px rgba(255,77,157,.4)
+}
+
+#noBtn{
+background:#fff;color:#ff4d6d;
+position:absolute;left:50%;top:75px;
+transform:translateX(-50%) scale(1);
+transition:.15s;
+}
+
+.message{
+display:none;font-size:1.6rem;margin-top:20px;
+animation:pop .6s ease forwards
+}
+
 .surprise{display:none;margin-top:15px}
-.surprise a{display:block;background:#ff4d6d;color:#fff;padding:12px;border-radius:30px;
-margin:8px 0;text-decoration:none}
-@keyframes pop{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
-.heart{position:fixed;top:-20px;font-size:22px;animation:fall linear forwards;pointer-events:none}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+
+.surprise a{
+display:block;background:#ff4d6d;color:#fff;
+padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
+}
+
+@keyframes pop{
+0%{transform:scale(.5);opacity:0}
+100%{transform:scale(1);opacity:1}
+}
+
+.heart{
+position:fixed;top:-20px;font-size:24px;
+animation:fall linear forwards;pointer-events:none
+}
+
+.firework{
+position:fixed;font-size:26px;animation:boom 1.2s ease forwards
+}
+
+@keyframes fall{
+to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+
+@keyframes boom{
+0%{transform:scale(.3);opacity:1}
+100%{transform:scale(2);opacity:0}
+}
 </style>
 </head>
+
 <body>
 
-<audio autoplay loop>
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" loop>
 <source src="https://drive.google.com/uc?export=download&id=1UcsVfnZBb5y13UxUexHw7RW9LO07-5Pg" type="audio/mpeg">
 </audio>
 
+<script>
+/* ✍️ CUSTOM NAMA */
+const herName = "NOVI SAYANGGG";
+</script>
+
 <div class="container">
 <h1>Will You Be My Valentine?</h1>
-<h2>pretty little devil 😈💗</h2>
+<h2 id="sub">Hey <span id="name"></span> 😈💗</h2>
 
 <div id="countdown"></div>
 
 <div class="slideshow">
-  <img src="https://drive.google.com/uc?export=download&id=1MIhB9QHIdCuHywKQJBfCI-2ROfUJepyV" class="active">
-  <img src="https://drive.google.com/uc?export=download&id=1kACDowAxJHpnHN4_ysV7xvbx3pYTf-R9">
-  <img src="https://drive.google.com/uc?export=download&id=1yhuYu6mFN44WF9i8XkMLt31989hjEHoa">
+<img src="https://drive.google.com/uc?export=download&id=1MIhB9QHIdCuHywKQJBfCI-2ROfUJepyV" class="active">
+<img src="https://drive.google.com/uc?export=download&id=1kACDowAxJHpnHN4_ysV7xvbx3pYTf-R9">
+<img src="https://drive.google.com/uc?export=download&id=1yhuYu6mFN44WF9i8XkMLt31989hjEHoa">
 </div>
+
+<button id="musicBtn">🎵 Play Music</button>
 
 <div class="buttons">
 <button id="yesBtn">Yes 💕</button>
 <button id="noBtn">No 🙈</button>
 </div>
 
-<div class="message" id="message">
-Yay! See you on February 14th! 💘
-</div>
+<div class="message" id="message"></div>
 
 <div class="surprise" id="surprise">
-<a href="https://wa.me/6282190109525?text=I%20said%20YES%20to%20being%20your%20Valentine%20💖😈" target="_blank">
-💌 Send Confirmation
-</a>
+<a id="wa" target="_blank">💌 Send Confirmation</a>
 <a href="https://maps.app.goo.gl/3QmZFizfKr9QB4eG6" target="_blank">
 📍 Our Date Location
 </a>
@@ -71,49 +139,93 @@ Yay! See you on February 14th! 💘
 </div>
 
 <script>
+// 🌙 DARK MODE
 const h=new Date().getHours();
 if(h>=18||h<=5)document.body.classList.add("dark");
 
+// 👩 NAME
+document.getElementById("name").innerText=herName;
+
+// ⏳ COUNTDOWN
 const cd=document.getElementById("countdown");
 function updateCD(){
 const t=new Date("Feb 14, 2026 00:00").getTime();
 const n=new Date().getTime();
 const d=t-n;
-if(d<0){cd.innerHTML="It's Valentine Day 💘";return;}
-cd.innerHTML=`⏳ ${Math.floor(d/(1000*60*60*24))} days to Valentine`;}
+cd.innerHTML=d<0?"It's Valentine Day 💘":
+`⏳ ${Math.floor(d/(1000*60*60*24))} days to Valentine`;
+}
 setInterval(updateCD,1000);updateCD();
 
-const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseenter",()=>{
-noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth)+"px";
-noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight)+"px";});
+// 🎵 MUSIC
+const music=document.getElementById("bgMusic");
+const musicBtn=document.getElementById("musicBtn");
+musicBtn.onclick=()=>{music.play();musicBtn.style.display="none";};
 
+// 😈 NO BUTTON GOD MODE
+const noBtn=document.getElementById("noBtn");
+let scale=1;
+noBtn.addEventListener("mouseenter",()=>{
+scale-=0.1;
+noBtn.style.transform=`scale(${Math.max(scale,.4)})`;
+noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth)+"px";
+noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight)+"px";
+});
+
+// 💖 YES ACTION
 const yes=document.getElementById("yesBtn");
 const msg=document.getElementById("message");
 const sp=document.getElementById("surprise");
 
-yes.addEventListener("click",()=>{
+yes.onclick=()=>{
+music.play();
+msg.innerHTML=`Yay ${herName}! 💘<br>You’re officially my Valentine 😈`;
 msg.style.display="block";
 sp.style.display="block";
-navigator.vibrate?.([200,100,200]);
-rain();});
+navigator.vibrate?.([300,150,300,150,500]);
+rain();
+fireworks();
+};
 
+// 💕 HEART RAIN
 function rain(){
 setInterval(()=>{
 const e=document.createElement("div");
 e.className="heart";
-e.innerHTML=Math.random()>0.5?"💖":"🌸";
+e.innerHTML=Math.random()>.5?"💖":"✨";
 e.style.left=Math.random()*100+"vw";
 e.style.animationDuration=2+Math.random()*3+"s";
 document.body.appendChild(e);
-setTimeout(()=>e.remove(),5000);},160);}
+setTimeout(()=>e.remove(),5000);
+},120);
+}
 
+// 🎆 FIREWORKS
+function fireworks(){
+for(let i=0;i<18;i++){
+const f=document.createElement("div");
+f.className="firework";
+f.innerHTML="🎆";
+f.style.left=Math.random()*100+"vw";
+f.style.top=Math.random()*100+"vh";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1200);
+}
+}
+
+// 🖼️ SLIDESHOW
 const slides=document.querySelectorAll(".slideshow img");
 let i=0;
 setInterval(()=>{
 slides[i].classList.remove("active");
 i=(i+1)%slides.length;
-slides[i].classList.add("active");},2500);
+slides[i].classList.add("active");
+},2500);
+
+// 💌 WHATSAPP AUTO TEXT
+document.getElementById("wa").href=
+`https://wa.me/6282190109525?text=I%20said%20YES%20😈💖%20I’m%20your%20Valentine%20now!`;
 </script>
+
 </body>
 </html>
