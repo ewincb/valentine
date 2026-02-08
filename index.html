@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine Surprise 💘</title>
+<title>Will You Be My Valentine 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
@@ -11,109 +11,131 @@
 
 body{
 margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
-overflow:hidden;background:linear-gradient(135deg,#ffd1dc,#ffe6f0);transition:.5s;
+background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
+overflow:hidden;
 }
 
-.dark{background:linear-gradient(135deg,#2b0a1f,#000)}
+/* ✉️ ENVELOPE */
+#envelope{
+position:fixed;inset:0;
+display:flex;justify-content:center;align-items:center;
+background:linear-gradient(135deg,#ff9aaf,#ffcad4);
+z-index:10;
+transition:.8s;
+}
 
+.envelope{
+width:280px;height:180px;
+background:#fff;border-radius:14px;
+display:flex;justify-content:center;align-items:center;
+box-shadow:0 20px 40px rgba(0,0,0,.25);
+cursor:pointer;
+animation:float 2s infinite alternate;
+}
+
+.envelope span{font-size:1.6rem;color:#ff4d6d}
+
+@keyframes float{
+from{transform:translateY(0)}
+to{transform:translateY(-12px)}
+}
+
+.hide{opacity:0;pointer-events:none}
+
+/* MAIN */
 .container{
-text-align:center;padding:20px;max-width:360px;color:#ff4d6d
+display:none;
+text-align:center;
+padding:20px;
+max-width:360px;
+color:#ff4d6d;
 }
 
-.dark .container{color:#ffb6c1}
-
-h1{font-size:2.2rem;text-shadow:0 0 10px rgba(255,77,157,.4)}
-h2{font-size:1.1rem;margin-bottom:10px}
-
-#countdown{font-size:1rem;margin-bottom:15px}
+h1{font-size:2.2rem}
+h2{font-size:1.1rem;margin-bottom:15px}
 
 .slideshow{
-width:100%;height:200px;border-radius:20px;overflow:hidden;margin-bottom:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.15)
+width:100%;height:200px;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
 }
 
-.slideshow img{width:100%;height:100%;object-fit:cover;display:none}
+.slideshow img{
+width:100%;height:100%;
+object-fit:cover;
+display:none;
+}
+
 .slideshow img.active{display:block}
 
-#musicBtn{
-background:#ff8fab;color:white;border:none;border-radius:30px;
-padding:10px 22px;font-size:1rem;margin-bottom:15px;
-box-shadow:0 6px 15px rgba(255,143,171,.4)
+.buttons{
+position:relative;
+height:150px;
 }
 
-.buttons{position:relative;height:140px}
-
 button{
-border:none;border-radius:50px;padding:14px 28px;
-font-size:1.2rem;cursor:pointer
+border:none;
+border-radius:50px;
+padding:14px 30px;
+font-size:1.2rem;
+cursor:pointer;
+transition:.3s;
 }
 
 #yesBtn{
-background:#ff4d9d;color:#fff;
-box-shadow:0 8px 20px rgba(255,77,157,.4)
+background:#ff4d9d;
+color:#fff;
+box-shadow:0 8px 20px rgba(255,77,157,.4);
 }
 
 #noBtn{
-background:#fff;color:#ff4d6d;
-position:absolute;left:50%;top:75px;
+background:#fff;
+color:#ff4d6d;
+position:absolute;
+left:50%;
+top:80px;
 transform:translateX(-50%) scale(1);
-transition:.15s;
 }
 
 .message{
-display:none;font-size:1.6rem;margin-top:20px;
-animation:pop .6s ease forwards
-}
-
-.surprise{display:none;margin-top:15px}
-
-.surprise a{
-display:block;background:#ff4d6d;color:#fff;
-padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
-}
-
-@keyframes pop{
-0%{transform:scale(.5);opacity:0}
-100%{transform:scale(1);opacity:1}
+display:none;
+font-size:1.6rem;
+margin-top:20px;
 }
 
 .heart{
-position:fixed;top:-20px;font-size:24px;
-animation:fall linear forwards;pointer-events:none
-}
-
-.firework{
-position:fixed;font-size:26px;animation:boom 1.2s ease forwards
+position:fixed;
+top:-20px;
+font-size:24px;
+animation:fall linear forwards;
+pointer-events:none;
 }
 
 @keyframes fall{
 to{transform:translateY(110vh) rotate(360deg);opacity:0}
-}
-
-@keyframes boom{
-0%{transform:scale(.3);opacity:1}
-100%{transform:scale(2);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
+<!-- ✉️ OPENING -->
+<div id="envelope">
+  <div class="envelope" id="openEnvelope">
+    <span>💌 Open Invitation</span>
+  </div>
+</div>
+
 <!-- 🎵 MUSIC -->
 <audio id="bgMusic" loop>
-<source src="assets/music/love.mp3" type="audio/mpeg">
+  <source src="assets/music/love.mp3" type="audio/mpeg">
 </audio>
 
-<script>
-/* ✍️ CUSTOM NAMA */
-const herName = "Novi Sayanggg";
-</script>
-
-<div class="container">
+<div class="container" id="main">
 <h1>Will You Be My Valentine?</h1>
-<h2 id="sub">Hey <span id="name"></span> 😈💗</h2>
-
-<div id="countdown"></div>
+<h2>Hey Novi Sayanggg 😈💗</h2>
 
 <div class="slideshow">
 <img src="assets/images/foto1.jpeg" class="active">
@@ -121,99 +143,28 @@ const herName = "Novi Sayanggg";
 <img src="assets/images/foto3.jpeg">
 </div>
 
-<button id="musicBtn">🎵 Play Music</button>
-
 <div class="buttons">
 <button id="yesBtn">Yes 💕</button>
 <button id="noBtn">No 🙈</button>
 </div>
 
 <div class="message" id="message"></div>
-
-<div class="surprise" id="surprise">
-<a id="wa" target="_blank">💌 Send Confirmation</a>
-<a href="https://maps.app.goo.gl/3QmZFizfKr9QB4eG6" target="_blank">
-📍 Our Date Location
-</a>
-</div>
 </div>
 
 <script>
-// 🌙 DARK MODE
-const h=new Date().getHours();
-if(h>=18||h<=5)document.body.classList.add("dark");
-
-// 👩 NAME
-document.getElementById("name").innerText=herName;
-
-// ⏳ COUNTDOWN
-const cd=document.getElementById("countdown");
-function updateCD(){
-const t=new Date("Feb 14, 2026 00:00").getTime();
-const n=new Date().getTime();
-const d=t-n;
-cd.innerHTML=d<0?"It's Valentine Day 💘":
-`⏳ ${Math.floor(d/(1000*60*60*24))} days to Valentine`;
-}
-setInterval(updateCD,1000);updateCD();
-
-// 🎵 MUSIC
+/* OPEN ENVELOPE → MUSIC AUTOPLAY */
+const envelope=document.getElementById("envelope");
+const open=document.getElementById("openEnvelope");
+const main=document.getElementById("main");
 const music=document.getElementById("bgMusic");
-const musicBtn=document.getElementById("musicBtn");
-musicBtn.onclick=()=>{music.play();musicBtn.style.display="none";};
 
-// 😈 NO BUTTON GOD MODE
-const noBtn=document.getElementById("noBtn");
-let scale=1;
-noBtn.addEventListener("mouseenter",()=>{
-scale-=0.1;
-noBtn.style.transform=`scale(${Math.max(scale,.4)})`;
-noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth)+"px";
-noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight)+"px";
-});
-
-// 💖 YES ACTION
-const yes=document.getElementById("yesBtn");
-const msg=document.getElementById("message");
-const sp=document.getElementById("surprise");
-
-yes.onclick=()=>{
-music.play();
-msg.innerHTML=`Yay ${herName}! 💘<br>You’re officially my Valentine 😈`;
-msg.style.display="block";
-sp.style.display="block";
-navigator.vibrate?.([300,150,300,150,500]);
-rain();
-fireworks();
+open.onclick=()=>{
+  envelope.classList.add("hide");
+  main.style.display="block";
+  music.play();
 };
 
-// 💕 HEART RAIN
-function rain(){
-setInterval(()=>{
-const e=document.createElement("div");
-e.className="heart";
-e.innerHTML=Math.random()>.5?"💖":"✨";
-e.style.left=Math.random()*100+"vw";
-e.style.animationDuration=2+Math.random()*3+"s";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),5000);
-},120);
-}
-
-// 🎆 FIREWORKS
-function fireworks(){
-for(let i=0;i<18;i++){
-const f=document.createElement("div");
-f.className="firework";
-f.innerHTML="🎆";
-f.style.left=Math.random()*100+"vw";
-f.style.top=Math.random()*100+"vh";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),1200);
-}
-}
-
-// 🖼️ SLIDESHOW
+/* SLIDESHOW */
 const slides=document.querySelectorAll(".slideshow img");
 let i=0;
 setInterval(()=>{
@@ -222,9 +173,43 @@ i=(i+1)%slides.length;
 slides[i].classList.add("active");
 },2500);
 
-// 💌 WHATSAPP AUTO TEXT
-document.getElementById("wa").href=
-`https://wa.me/6282190109525?text=I%20said%20YES%20I’m%20your%20Valentine%20now!`;
+/* NO → MENGECIL SAMPAI HILANG */
+const no=document.getElementById("noBtn");
+const yes=document.getElementById("yesBtn");
+let scale=1;
+
+no.onclick=()=>{
+scale-=0.25;
+no.style.transform=`translateX(-50%) scale(${scale})`;
+no.style.left=Math.random()*60+20+"%";
+
+if(scale<=0){
+no.style.display="none";
+yes.style.transform="scale(1.3)";
+}
+};
+
+/* FINAL PROPOSAL MODE */
+const msg=document.getElementById("message");
+
+yes.onclick=()=>{
+msg.innerHTML="💍 Will you be mine forever?<br>Happy Valentine 💖";
+msg.style.display="block";
+rain();
+};
+
+/* HEART RAIN */
+function rain(){
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=2+Math.random()*3+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),5000);
+},150);
+}
 </script>
 
 </body>
