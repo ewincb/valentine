@@ -12,151 +12,84 @@
 body{
 margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
 background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
-overflow:hidden;
+overflow:hidden;transition:1s;
+}
+body.proposal{
+background:radial-gradient(circle at top,#ff9aaf,#ff4d9d,#2b0a1f);
 }
 
-/* ✉️ ENVELOPE */
+/* ENVELOPE */
 #envelope{
-position:fixed;inset:0;
-display:flex;justify-content:center;align-items:center;
+position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
 background:linear-gradient(135deg,#ff9aaf,#ffcad4);
-z-index:10;
-transition:.8s;
+z-index:10;transition:.8s;
 }
-
 .envelope{
-width:280px;height:180px;
-background:#fff;border-radius:14px;
+width:280px;height:180px;background:#fff;border-radius:14px;
 display:flex;justify-content:center;align-items:center;
 box-shadow:0 20px 40px rgba(0,0,0,.25);
-cursor:pointer;
-animation:float 2s infinite alternate;
+cursor:pointer;animation:float 2s infinite alternate;
 }
-
 .envelope span{font-size:1.6rem;color:#ff4d6d}
-
-@keyframes float{
-from{transform:translateY(0)}
-to{transform:translateY(-12px)}
-}
-
+@keyframes float{to{transform:translateY(-12px)}}
 .hide{opacity:0;pointer-events:none}
 
 /* MAIN */
-.container{
-display:none;
-text-align:center;
-padding:20px;
-max-width:360px;
-color:#ff4d6d;
-}
-
+.container{display:none;text-align:center;padding:20px;max-width:360px;color:#ff4d6d}
 h1{font-size:2.2rem}
 h2{font-size:1.1rem;margin-bottom:15px}
 
 .slideshow{
-width:100%;height:200px;
-border-radius:20px;
-overflow:hidden;
-margin-bottom:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
+width:100%;height:200px;border-radius:20px;overflow:hidden;
+margin-bottom:20px;box-shadow:0 10px 25px rgba(0,0,0,.15)
 }
-
-.slideshow img{
-width:100%;height:100%;
-object-fit:cover;
-display:none;
-}
-
+.slideshow img{width:100%;height:100%;object-fit:cover;display:none}
 .slideshow img.active{display:block}
 
-.buttons{
-position:relative;
-height:150px;
-}
-
+.buttons{position:relative;height:150px}
 button{
-border:none;
-border-radius:50px;
-padding:14px 30px;
-font-size:1.2rem;
-cursor:pointer;
-transition:.3s;
+border:none;border-radius:50px;padding:14px 30px;
+font-size:1.2rem;cursor:pointer;transition:.3s
 }
-
-#yesBtn{
-background:#ff4d9d;
-color:#fff;
-box-shadow:0 8px 20px rgba(255,77,157,.4);
-}
-
+#yesBtn{background:#ff4d9d;color:#fff}
 #noBtn{
-background:#fff;
-color:#ff4d6d;
-position:absolute;
-left:50%;
-top:80px;
-transform:translateX(-50%) scale(1);
+background:#fff;color:#ff4d6d;
+position:absolute;left:50%;top:80px;
+transform:translateX(-50%)
 }
 
-.message{
-display:none;
-font-size:1.6rem;
-margin-top:20px;
-}
-
-.links{
-display:none;
-margin-top:15px;
-}
-
+.message{display:none;font-size:1.6rem;margin-top:20px;color:#fff}
+.links{display:none;margin-top:15px}
 .links a{
-display:block;
-background:#ff4d6d;
-color:#fff;
-padding:12px;
-border-radius:30px;
-margin:8px 0;
-text-decoration:none;
+display:block;background:#fff;color:#ff4d9d;
+padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
 }
 
-/* 💍 RING */
-.ring{
-position:fixed;
-font-size:64px;
-animation:ring 1.2s ease forwards;
-}
-
+/* EFFECTS */
+.ring{position:fixed;font-size:64px;animation:ring 1.2s ease forwards}
 @keyframes ring{
 0%{transform:scale(.2);opacity:0}
-50%{transform:scale(1.2);opacity:1}
-100%{transform:scale(1);opacity:1}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
 }
 
-.heart{
-position:fixed;
-top:-20px;
-font-size:24px;
-animation:fall linear forwards;
-pointer-events:none;
+.heart,.confetti{
+position:fixed;top:-20px;font-size:22px;
+animation:fall linear forwards;pointer-events:none
 }
-
-@keyframes fall{
-to{transform:translateY(110vh) rotate(360deg);opacity:0}
-}
+.confetti{color:gold}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
 </style>
 </head>
 
 <body>
 
-<!-- ✉️ OPENING -->
 <div id="envelope">
   <div class="envelope" id="openEnvelope">
     <span>💌 Open Invitation</span>
   </div>
 </div>
 
-<!-- 🎵 MUSIC -->
 <audio id="bgMusic" loop>
   <source src="assets/music/love.mp3" type="audio/mpeg">
 </audio>
@@ -187,85 +120,68 @@ to{transform:translateY(110vh) rotate(360deg);opacity:0}
 </div>
 
 <script>
-const HER_NAME = "Novi Sayanggg";
-const WA_NUMBER = "6282190109525";
+const HER_NAME="Novi Sayanggg";
+const WA_NUMBER="6282190109525";
 
-/* OPEN ENVELOPE */
-const envelope=document.getElementById("envelope");
-const open=document.getElementById("openEnvelope");
-const main=document.getElementById("main");
-const music=document.getElementById("bgMusic");
+/* FULLSCREEN */
+function goFull(){
+if(document.documentElement.requestFullscreen)
+document.documentElement.requestFullscreen();
+}
 
-open.onclick=()=>{
-  envelope.classList.add("hide");
-  main.style.display="block";
-  music.play();
+/* OPEN */
+openEnvelope.onclick=()=>{
+goFull();
+envelope.classList.add("hide");
+main.style.display="block";
+bgMusic.play();
 };
 
-/* SLIDESHOW */
-const slides=document.querySelectorAll(".slideshow img");
+/* SLIDE */
 let i=0;
 setInterval(()=>{
-slides[i].classList.remove("active");
-i=(i+1)%slides.length;
-slides[i].classList.add("active");
+const s=document.querySelectorAll(".slideshow img");
+s[i].classList.remove("active");
+i=(i+1)%s.length;
+s[i].classList.add("active");
 },2500);
 
 /* NO → HILANG */
-const no=document.getElementById("noBtn");
-const yes=document.getElementById("yesBtn");
 let scale=1;
-
-no.onclick=()=>{
+noBtn.onclick=()=>{
 scale-=0.25;
-no.style.transform=`translateX(-50%) scale(${scale})`;
-no.style.left=Math.random()*60+20+"%";
-if(scale<=0){
-no.style.display="none";
-yes.style.transform="scale(1.3)";
-}
+noBtn.style.transform=`translateX(-50%) scale(${scale})`;
+if(scale<=0){noBtn.style.display="none";yesBtn.style.transform="scale(1.3)";}
 };
 
-/* YES → PROPOSAL MODE */
-const msg=document.getElementById("message");
-const links=document.getElementById("links");
-const wa=document.getElementById("waLink");
-
-yes.onclick=()=>{
-msg.innerHTML=`💍 ${HER_NAME}, will you be mine forever? 💖`;
-msg.style.display="block";
+/* YES → ULTIMATE PROPOSAL */
+yesBtn.onclick=()=>{
+document.body.classList.add("proposal");
+message.innerHTML=`💍 ${HER_NAME}, will you be mine forever? 💖`;
+message.style.display="block";
 links.style.display="block";
 
 /* RING */
 const r=document.createElement("div");
-r.className="ring";
-r.innerHTML="💍";
-r.style.left="50%";
-r.style.top="40%";
-r.style.transform="translate(-50%,-50%)";
+r.className="ring";r.innerHTML="💍";
+r.style.left="50%";r.style.top="40%";
 document.body.appendChild(r);
 
-/* WHATSAPP LINK */
-wa.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20💖%20I%20accept%20your%20proposal!`;
+/* WA */
+waLink.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20I%20accept%20your%20proposal!`;
+setTimeout(()=>window.open(waLink.href,"_blank"),3000);
 
-/* AUTO REDIRECT */
-setTimeout(()=>{ window.open(wa.href,"_blank"); },3000);
-
-rain();
-};
-
-/* HEART RAIN */
-function rain(){
+/* EFFECTS */
 setInterval(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerHTML="💖";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=2+Math.random()*3+"s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),5000);
-},150);
-}
+const e=document.createElement("div");
+e.className=Math.random()>.5?"heart":"confetti";
+e.innerHTML=Math.random()>.5?"💖":"🎉";
+e.style.left=Math.random()*100+"vw";
+e.style.animationDuration=2+Math.random()*3+"s";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),5000);
+},120);
+};
 </script>
 
 </body>
