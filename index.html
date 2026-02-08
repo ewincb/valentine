@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Will You Be My Valentine 💘</title>
+<title>Open Invitation 💗</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
@@ -13,184 +13,115 @@
 body{
 margin:0;height:100vh;
 display:flex;justify-content:center;align-items:center;
-background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
-overflow:hidden;
-transition:1s;
+background:radial-gradient(circle at top,#ffe6f2 0%,#ffc1da 45%,#ff9ac7 100%);
+overflow:hidden;transition:1s;
+color:#ff4da6;
 }
-body.dim{
-filter:brightness(.6);
+
 }
+body.dim{filter:brightness(.6)}
 body::after{
-content:"";
-position:fixed;inset:0;
-pointer-events:none;
-box-shadow:inset 0 0 140px rgba(0,0,0,.45);
-z-index:2;
+content:"";position:fixed;inset:0;pointer-events:none;
+box-shadow:inset 0 0 140px rgba(255,77,166,.35);z-index:2;
 }
 
 /* ================= SAKURA ================= */
-.sakura{
-position:fixed;
-top:-20px;
-font-size:18px;
-pointer-events:none;
-animation:fall linear forwards;
-}
-@keyframes fall{
-to{transform:translateY(110vh) rotate(360deg);opacity:0}
-}
+.sakura{position:fixed;top:-20px;font-size:18px;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
 
 /* ================= ENVELOPE ================= */
 #envelope{
-position:fixed;inset:0;
-display:flex;justify-content:center;align-items:center;
-background:rgba(0,0,0,.25);
-z-index:10;
+position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
+background:rgba(255,105,180,.25);z-index:10;
 }
 
 .envelope{
-width:320px;height:210px;
-position:relative;
-cursor:pointer;
-perspective:1200px;
-animation:float 2s infinite alternate;
-filter:drop-shadow(0 18px 35px rgba(0,0,0,.35));
+width:320px;height:210px;position:relative;cursor:pointer;
+perspective:1200px;animation:float 3s ease-in-out infinite;
+filter:drop-shadow(0 20px 40px rgba(255,77,166,.5));
 }
 
-/* GLOW */
-.envelope:hover,
-.envelope:active{
+
+.envelope:hover{
 filter:
-drop-shadow(0 0 18px #ff4d9d)
-drop-shadow(0 0 40px #ff7eb3);
+ drop-shadow(0 0 20px #ff6fb5)
+ drop-shadow(0 0 45px rgba(255,105,180,.9));
+transform:scale(1.03);
 }
 
-/* BACK */
+
 .envelope .back{
-position:absolute;inset:0;
-background:linear-gradient(145deg,#ffffff,#f0f0f0);
-border-radius:20px;
-box-shadow:
-inset 0 4px 10px rgba(255,255,255,.9),
-inset 0 -6px 12px rgba(0,0,0,.18);
+position:absolute;inset:0;border-radius:20px;
+background:linear-gradient(145deg,#ffd6e9,#ffb6d5);
 }
 
-/* FLAP */
 .envelope .flap{
-position:absolute;
-top:0;left:0;
-width:100%;height:100%;
-background:linear-gradient(145deg,#ffcad4,#ff9ab3);
+position:absolute;top:0;left:0;width:100%;height:100%;
+background:linear-gradient(145deg,#ff9ac7,#ff6fb5);
 clip-path:polygon(0 0,100% 0,50% 62%);
-transform-origin:top;
-transition:1s;
-border-radius:20px;
-box-shadow:inset 0 -6px 10px rgba(0,0,0,.2);
+transform-origin:top;transition:1s;border-radius:20px;
 }
 
-/* FRONT */
 .envelope .front{
-position:absolute;
-bottom:0;left:0;
-width:100%;height:65%;
-background:linear-gradient(145deg,#fff,#f3f3f3);
+position:absolute;bottom:0;left:0;width:100%;height:65%;
 border-radius:0 0 20px 20px;
+background:linear-gradient(145deg,#ffe3f1,#ffc1da);
 z-index:4;
 }
 
-/* LABEL */
 .envelope .label{
-position:absolute;
-bottom:55px;
-width:100%;
-text-align:center;
-font-size:1.4rem;
-color:#ff4d6d;
-z-index:5;
-pointer-events:none;
+position:absolute;bottom:55px;width:100%;text-align:center;
+font-size:1.4rem;color:#ff2f92;z-index:5;pointer-events:none;
 transition:.5s;
 }
 
-/* LETTER (INSIDE ENVELOPE) */
-.envelope .letter{
-position:absolute;
-left:14px;right:14px;
-bottom:18px;
-height:150px;
-background:#fff;
-border-radius:14px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:15px;
-font-size:1.25rem;
-color:#ff4d6d;
-transform:translateY(0);
-z-index:3;
-transition:1.1s cubic-bezier(.22,1,.36,1);
-overflow:hidden;
-}
-
-/* OPEN ANIMATION */
-.envelope.open .flap{
-transform:rotateX(180deg);
-}
-.envelope.open .letter{
-transform:translateY(-150px);
-}
-.envelope.open .label{
-opacity:0;
-}
+.envelope.open .flap{transform:rotateX(180deg)}
+.envelope.open .label{opacity:0}
 
 @keyframes float{to{transform:translateY(-12px)}}
 .hide{opacity:0;pointer-events:none}
 
 /* ================= MAIN ================= */
-.container{display:none;text-align:center;padding:20px;max-width:360px;color:#ff4d6d}
-h1{font-size:2.2rem}
-h2{font-size:1.1rem;margin-bottom:15px}
+.container{display:none;text-align:center;padding:20px;max-width:360px}
+h1{font-size:2.3rem;color:#ff2f92;text-shadow:0 0 15px rgba(255,105,180,.6)}
+h2{font-size:1.1rem;margin-bottom:15px;color:#ff5fb3}
 
 .slideshow{
-width:100%;height:200px;border-radius:20px;overflow:hidden;
-margin-bottom:20px;box-shadow:0 10px 25px rgba(0,0,0,.15)
+width:100%;height:200px;border-radius:22px;overflow:hidden;
+margin-bottom:20px;
+box-shadow:0 12px 30px rgba(255,77,166,.35);
 }
+
 .slideshow img{width:100%;height:100%;object-fit:cover;display:none}
 .slideshow img.active{display:block}
 
 .buttons{position:relative;height:150px}
-button{
-border:none;border-radius:50px;padding:14px 30px;
-font-size:1.2rem;cursor:pointer;transition:.3s
+button{border:none;border-radius:50px;padding:14px 30px;font-size:1.2rem;cursor:pointer;transition:.3s}
+#yesBtn{
+background:linear-gradient(135deg,#ff2f92,#ff6fb5);
+color:#fff;box-shadow:0 8px 20px rgba(255,47,146,.45)
 }
-#yesBtn{background:#ff4d9d;color:#fff}
+
 #noBtn{
-background:#fff;color:#ff4d6d;
+background:#fff;color:#ff4da6;
 position:absolute;left:50%;top:80px;
-transform:translateX(-50%)
+transform:translateX(-50%);
+box-shadow:0 6px 16px rgba(255,105,180,.35)
 }
 
-.message{display:none;font-size:1.6rem;margin-top:20px;color:#fff}
 
-#countdown{
-display:none;
-margin-top:25px;
-font-size:1.8rem;
-color:#fff;
-animation:pulse 1.5s infinite;
-text-shadow:0 0 12px #ff9ad5,0 0 30px #ff4d9d;
+.message{
+display:none;font-size:1.7rem;margin-top:20px;
+color:#ff2f92;
+animation:fadeUp 1s ease forwards
 }
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.15)}
-100%{transform:scale(1)}
-}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+#countdown{display:none;margin-top:25px;font-size:1.8rem;color:#ff2f92;animation:pulse 1.5s infinite;text-shadow:0 0 12px #ff9ad5}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
 
 .links{display:none;margin-top:15px}
-.links a{
-display:block;background:#fff;color:#ff4d9d;
-padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
-}
+.links a{display:block;background:#fff;color:#ff4da6;padding:12px;border-radius:30px;margin:8px 0;text-decoration:none}
 </style>
 </head>
 
@@ -201,8 +132,6 @@ padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
   <div class="envelope" id="openEnvelope">
     <div class="back"></div>
     <div class="flap"></div>
-    <div class="letter" id="letter"
-      data-text="This invitation is written only for you 💖"></div>
     <div class="front"></div>
     <div class="label">💌 Open Invitation</div>
   </div>
@@ -239,90 +168,57 @@ padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
 const HER_NAME="Novi Sayanggg";
 const WA_NUMBER="6282190109525";
 
-/* SOFT HAPTIC */
-function softHaptic(){
-if(navigator.vibrate) navigator.vibrate(15);
-}
+openEnvelope.onclick=()=>{
+openEnvelope.classList.add("open");
+openEnvelope.style.animation='none';
+setTimeout(()=>envelope.classList.add("hide"),1200);
+setTimeout(()=>{
+document.body.classList.remove("dim");
+main.style.display="block";
+bgMusic.volume=0;bgMusic.play();
+let v=0;const fade=setInterval(()=>{v+=0.05;bgMusic.volume=Math.min(v,1);if(v>=1)clearInterval(fade)},120);
+},1600);
+};
 
-/* TYPING */
-function typeText(el,text){
-el.innerHTML="";
-let i=0;
-const t=setInterval(()=>{
-el.innerHTML+=text.charAt(i);
-i++;
-if(i>=text.length) clearInterval(t);
-},45);
-}
 
-/* SAKURA FALL */
 setInterval(()=>{
 const s=document.createElement("div");
 s.className="sakura";
-s.innerHTML=["🌸","🌺","🌷"][Math.floor(Math.random()*3)];
+s.innerHTML=["🌸","🌷","💮"][Math.floor(Math.random()*3)];
 s.style.left=Math.random()*100+"vw";
 s.style.animationDuration=6+Math.random()*4+"s";
 document.body.appendChild(s);
 setTimeout(()=>s.remove(),10000);
 },400);
 
-/* OPEN ENVELOPE */
-openEnvelope.onclick=()=>{
-softHaptic();
-openEnvelope.classList.add("open");
-typeText(letter,letter.dataset.text);
-
-setTimeout(()=>envelope.classList.add("hide"),1700);
-setTimeout(()=>{
-document.body.classList.remove("dim");
-main.style.display="block";
-bgMusic.play();
-},2100);
-};
-
-/* SLIDESHOW */
 let i=0;
 setInterval(()=>{
-const s=document.querySelectorAll(".slideshow img");
-s[i].classList.remove("active");
-i=(i+1)%s.length;
-s[i].classList.add("active");
+const s=document.querySelectorAll('.slideshow img');
+s[i].classList.remove('active');
+i=(i+1)%s.length;s[i].classList.add('active');
 },2500);
 
-/* NO */
 let scale=1;
-noBtn.onclick=()=>{
-scale-=0.25;
-noBtn.style.transform=`translateX(-50%) scale(${scale})`;
-if(scale<=0){noBtn.style.display="none";yesBtn.style.transform="scale(1.3)";}
-};
+noBtn.onclick=()=>{scale-=0.25;noBtn.style.transform=`translateX(-50%) scale(${scale})`;if(scale<=0){noBtn.style.display='none';yesBtn.style.transform='scale(1.3)'}};
 
-/* COUNTDOWN */
 function startCountdown(){
 const target=new Date("2026-02-14T00:00:00").getTime();
-countdown.style.display="block";
+countdown.style.display='block';
 setInterval(()=>{
 const d=target-Date.now();
-if(d<=0){time.innerHTML="💖 OUR MOMENT 💖";return;}
-time.innerHTML=
-`${Math.floor(d/86400000)}d `
-+`${Math.floor(d%86400000/3600000)}h `
-+`${Math.floor(d%3600000/60000)}m `
-+`${Math.floor(d%60000/1000)}s`;
+if(d<=0){time.innerHTML='💖 OUR MOMENT 💖';return}
+time.innerHTML=`${Math.floor(d/86400000)}d ${Math.floor(d%86400000/3600000)}h ${Math.floor(d%3600000/60000)}m ${Math.floor(d%60000/1000)}s`;
 },1000);
 }
 
-/* YES */
 yesBtn.onclick=()=>{
-document.body.classList.add("proposal");
-document.querySelector(".buttons").style.display="none";
+document.querySelector('.buttons').style.display='none';
 message.innerHTML=`💍 ${HER_NAME}, will you be mine forever? 💖`;
-message.style.display="block";
+message.style.display='block';
 startCountdown();
-links.style.display="block";
-waLink.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20I%20accept%20your%20proposal!`;
+links.style.display='block';
+waLink.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20💖`;
 };
 </script>
-
 </body>
 </html>
