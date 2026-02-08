@@ -20,7 +20,7 @@ body.proposal{
 background:radial-gradient(circle at top,#ff9aaf,#ff4d9d,#2b0a1f);
 }
 
-/* SAKURA */
+/* 🌸 SAKURA (BACKGROUND LAYER) */
 .sakura{
 position:fixed;
 top:-30px;
@@ -28,6 +28,7 @@ font-size:22px;
 pointer-events:none;
 animation:fall linear forwards;
 opacity:.9;
+z-index:1;
 }
 @keyframes fall{
 to{
@@ -41,7 +42,7 @@ opacity:0;
 position:fixed;inset:0;
 display:flex;justify-content:center;align-items:center;
 background:linear-gradient(135deg,#ff9aaf,#ffcad4);
-z-index:10;transition:.8s;
+z-index:20;transition:.8s;
 }
 .envelope{
 width:280px;height:180px;background:#fff;border-radius:14px;
@@ -58,6 +59,8 @@ cursor:pointer;animation:float 2s infinite alternate;
 display:none;text-align:center;padding:20px;
 max-width:360px;color:#ffffff;
 text-shadow:0 2px 6px rgba(0,0,0,.35);
+position:relative;
+z-index:5;
 }
 
 h1{
@@ -69,11 +72,13 @@ font-size:1.1rem;margin-bottom:15px;
 color:#ffe6f0;
 }
 
-/* SLIDESHOW */
+/* SLIDESHOW (FRONT LAYER) */
 .slideshow{
 width:100%;height:200px;border-radius:20px;overflow:hidden;
 margin-bottom:20px;
 box-shadow:0 10px 25px rgba(0,0,0,.15);
+position:relative;
+z-index:10;
 }
 .slideshow img{
 width:100%;height:100%;
@@ -133,7 +138,7 @@ text-shadow:
 }
 
 /* EFFECTS */
-.ring{position:fixed;font-size:64px;animation:ring 1.2s ease forwards}
+.ring{position:fixed;font-size:64px;animation:ring 1.2s ease forwards;z-index:15}
 @keyframes ring{
 0%{transform:scale(.2);opacity:0}
 50%{transform:scale(1.2)}
@@ -142,6 +147,7 @@ text-shadow:
 .heart,.confetti{
 position:fixed;top:-20px;font-size:22px;
 animation:fall linear forwards;pointer-events:none;
+z-index:12;
 }
 .confetti{color:gold}
 </style>
@@ -175,14 +181,11 @@ animation:fall linear forwards;pointer-events:none;
 </div>
 
 <div class="message" id="message"></div>
-
 <div id="countdown">⏳ <span id="time"></span></div>
 
 <div class="links" id="links">
 <a id="waLink" target="_blank">💌 Send Answer via WhatsApp</a>
-<a href="https://maps.app.goo.gl/3QmZFizfKr9QB4eG6" target="_blank">
-📍 Open Date Location
-</a>
+<a href="https://maps.app.goo.gl/3QmZFizfKr9QB4eG6" target="_blank">📍 Open Date Location</a>
 </div>
 </div>
 
@@ -190,15 +193,8 @@ animation:fall linear forwards;pointer-events:none;
 const HER_NAME="Novi Sayanggg";
 const WA_NUMBER="6282190109525";
 
-/* FULLSCREEN */
-function goFull(){
-if(document.documentElement.requestFullscreen)
-document.documentElement.requestFullscreen();
-}
-
-/* OPEN */
 openEnvelope.onclick=()=>{
-goFull();
+document.documentElement.requestFullscreen?.();
 envelope.classList.add("hide");
 main.style.display="block";
 bgMusic.play();
@@ -218,63 +214,31 @@ let scale=1;
 noBtn.onclick=()=>{
 scale-=0.25;
 noBtn.style.transform=`translateX(-50%) scale(${scale})`;
-if(scale<=0){
-noBtn.style.display="none";
-yesBtn.style.transform="scale(1.3)";
-}
+if(scale<=0){noBtn.style.display="none";yesBtn.style.transform="scale(1.3)";}
 };
 
 /* COUNTDOWN */
 function startCountdown(){
-const targetDate=new Date("2026-02-14T00:00:00").getTime();
-const time=document.getElementById("time");
-document.getElementById("countdown").style.display="block";
-
+const t=new Date("2026-02-14T00:00:00").getTime();
 setInterval(()=>{
-const now=new Date().getTime();
-const d=targetDate-now;
-if(d<=0){time.innerHTML="💖 OUR MOMENT 💖";return;}
-const days=Math.floor(d/(1000*60*60*24));
-const h=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-const m=Math.floor((d%(1000*60*60))/(1000*60));
-const s=Math.floor((d%(1000*60))/1000);
-time.innerHTML=`${days}d ${h}h ${m}m ${s}s`;
+const d=t-Date.now();
+time.innerHTML=d<=0?"💖 OUR MOMENT 💖":
+`${Math.floor(d/86400000)}d ${Math.floor(d%86400000/3600000)}h ${Math.floor(d%3600000/60000)}m ${Math.floor(d%60000/1000)}s`;
 },1000);
 }
 
-/* YES BUTTON */
+/* YES */
 yesBtn.onclick=()=>{
 document.body.classList.add("proposal");
 document.querySelector(".buttons").style.display="none";
 message.innerHTML=`💍 ${HER_NAME}, will you be mine forever? 💖`;
 message.style.display="block";
+countdown.style.display="block";
 startCountdown();
 links.style.display="block";
-
-/* RING */
-const r=document.createElement("div");
-r.className="ring";
-r.innerHTML="💍";
-r.style.left="50%";r.style.top="40%";
-document.body.appendChild(r);
-
-/* WHATSAPP */
-waLink.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20I%20accept%20your%20proposal!`;
-setTimeout(()=>window.open(waLink.href,"_blank"),3000);
-
-/* HEART & CONFETTI */
-setInterval(()=>{
-const e=document.createElement("div");
-e.className=Math.random()>.5?"heart":"confetti";
-e.innerHTML=Math.random()>.5?"💖":"🎉";
-e.style.left=Math.random()*100+"vw";
-e.style.animationDuration=2+Math.random()*3+"s";
-document.body.appendChild(e);
-setTimeout(()=>e.remove(),5000);
-},120);
 };
 
-/* 🌸 SAKURA FALLING */
+/* 🌸 SAKURA FALL */
 setInterval(()=>{
 const s=document.createElement("div");
 s.className="sakura";
