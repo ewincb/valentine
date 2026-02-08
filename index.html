@@ -18,19 +18,13 @@ overflow:hidden;
 transition:1s;
 }
 body.dim{
-filter:blur(2px) brightness(.6);
+filter:brightness(.6);
 }
-body.proposal{
-filter:none;
-background:radial-gradient(circle at top,#ff9aaf,#ff4d9d,#2b0a1f);
-}
-
-/* VIGNETTE */
 body::after{
 content:"";
 position:fixed;inset:0;
 pointer-events:none;
-box-shadow:inset 0 0 120px rgba(0,0,0,.45);
+box-shadow:inset 0 0 140px rgba(0,0,0,.45);
 z-index:2;
 }
 
@@ -41,13 +35,9 @@ top:-20px;
 font-size:18px;
 pointer-events:none;
 animation:fall linear forwards;
-opacity:.9;
 }
 @keyframes fall{
-to{
-transform:translateY(110vh) rotate(360deg);
-opacity:0;
-}
+to{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
 
 /* ================= ENVELOPE ================= */
@@ -62,27 +52,27 @@ z-index:10;
 width:320px;height:210px;
 position:relative;
 cursor:pointer;
-perspective:1000px;
+perspective:1200px;
 animation:float 2s infinite alternate;
-filter:drop-shadow(0 15px 35px rgba(0,0,0,.35));
+filter:drop-shadow(0 18px 35px rgba(0,0,0,.35));
 }
 
 /* GLOW */
 .envelope:hover,
 .envelope:active{
 filter:
-drop-shadow(0 0 20px #ff4d9d)
-drop-shadow(0 0 50px #ff7eb3);
+drop-shadow(0 0 18px #ff4d9d)
+drop-shadow(0 0 40px #ff7eb3);
 }
 
 /* BACK */
 .envelope .back{
 position:absolute;inset:0;
-background:linear-gradient(145deg,#fff,#f1f1f1);
-border-radius:18px;
+background:linear-gradient(145deg,#ffffff,#f0f0f0);
+border-radius:20px;
 box-shadow:
-inset 0 4px 8px rgba(255,255,255,.9),
-inset 0 -6px 10px rgba(0,0,0,.12);
+inset 0 4px 10px rgba(255,255,255,.9),
+inset 0 -6px 12px rgba(0,0,0,.18);
 }
 
 /* FLAP */
@@ -91,14 +81,24 @@ position:absolute;
 top:0;left:0;
 width:100%;height:100%;
 background:linear-gradient(145deg,#ffcad4,#ff9ab3);
-clip-path:polygon(0 0,100% 0,50% 60%);
+clip-path:polygon(0 0,100% 0,50% 62%);
 transform-origin:top;
 transition:1s;
-border-radius:18px;
-box-shadow:inset 0 -4px 6px rgba(0,0,0,.15);
+border-radius:20px;
+box-shadow:inset 0 -6px 10px rgba(0,0,0,.2);
 }
 
-/* TEXT ON ENVELOPE */
+/* FRONT */
+.envelope .front{
+position:absolute;
+bottom:0;left:0;
+width:100%;height:65%;
+background:linear-gradient(145deg,#fff,#f3f3f3);
+border-radius:0 0 20px 20px;
+z-index:4;
+}
+
+/* LABEL */
 .envelope .label{
 position:absolute;
 bottom:55px;
@@ -106,15 +106,17 @@ width:100%;
 text-align:center;
 font-size:1.4rem;
 color:#ff4d6d;
+z-index:5;
 pointer-events:none;
 transition:.5s;
 }
 
-/* LETTER */
+/* LETTER (INSIDE ENVELOPE) */
 .envelope .letter{
 position:absolute;
-left:14px;right:14px;bottom:14px;
-height:160px;
+left:14px;right:14px;
+bottom:18px;
+height:150px;
 background:#fff;
 border-radius:14px;
 display:flex;
@@ -124,14 +126,22 @@ text-align:center;
 padding:15px;
 font-size:1.25rem;
 color:#ff4d6d;
-transform:translateY(70px);
-transition:1s;
+transform:translateY(0);
+z-index:3;
+transition:1.1s cubic-bezier(.22,1,.36,1);
+overflow:hidden;
 }
 
-/* OPEN */
-.envelope.open .flap{transform:rotateX(180deg)}
-.envelope.open .letter{transform:translateY(-130px)}
-.envelope.open .label{opacity:0}
+/* OPEN ANIMATION */
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+.envelope.open .letter{
+transform:translateY(-150px);
+}
+.envelope.open .label{
+opacity:0;
+}
 
 @keyframes float{to{transform:translateY(-12px)}}
 .hide{opacity:0;pointer-events:none}
@@ -162,7 +172,6 @@ transform:translateX(-50%)
 
 .message{display:none;font-size:1.6rem;margin-top:20px;color:#fff}
 
-/* COUNTDOWN */
 #countdown{
 display:none;
 margin-top:25px;
@@ -192,10 +201,10 @@ padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
   <div class="envelope" id="openEnvelope">
     <div class="back"></div>
     <div class="flap"></div>
-    <div class="label">💌 Open Invitation</div>
     <div class="letter" id="letter"
-      data-text="This invitation is written only for you 💖">
-    </div>
+      data-text="This invitation is written only for you 💖"></div>
+    <div class="front"></div>
+    <div class="label">💌 Open Invitation</div>
   </div>
 </div>
 
@@ -230,9 +239,9 @@ padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
 const HER_NAME="Novi Sayanggg";
 const WA_NUMBER="6282190109525";
 
-/* iOS SOFT HAPTIC */
+/* SOFT HAPTIC */
 function softHaptic(){
-if(navigator.vibrate) navigator.vibrate(20);
+if(navigator.vibrate) navigator.vibrate(15);
 }
 
 /* TYPING */
@@ -257,21 +266,21 @@ document.body.appendChild(s);
 setTimeout(()=>s.remove(),10000);
 },400);
 
-/* OPEN */
+/* OPEN ENVELOPE */
 openEnvelope.onclick=()=>{
 softHaptic();
 openEnvelope.classList.add("open");
 typeText(letter,letter.dataset.text);
 
-setTimeout(()=>envelope.classList.add("hide"),1600);
+setTimeout(()=>envelope.classList.add("hide"),1700);
 setTimeout(()=>{
 document.body.classList.remove("dim");
 main.style.display="block";
 bgMusic.play();
-},2000);
+},2100);
 };
 
-/* SLIDE */
+/* SLIDESHOW */
 let i=0;
 setInterval(()=>{
 const s=document.querySelectorAll(".slideshow img");
