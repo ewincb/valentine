@@ -2,138 +2,111 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Open Invitation 💗</title>
+<title>Will You Be My Valentine 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;font-family:'Pacifico',cursive}
 
-/* ================= BODY ================= */
 body{
-margin:0;height:100vh;
-display:flex;justify-content:center;align-items:center;
-background:radial-gradient(circle at top,#ffe6f2 0%,#ffc1da 45%,#ff9ac7 100%);
+margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
+background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
 overflow:hidden;transition:1s;
-color:#ff4da6;
+}
+body.proposal{
+background:radial-gradient(circle at top,#ff9aaf,#ff4d9d,#2b0a1f);
 }
 
-}
-body.dim{filter:brightness(.6)}
-body::after{
-content:"";position:fixed;inset:0;pointer-events:none;
-box-shadow:inset 0 0 140px rgba(255,77,166,.35);z-index:2;
-}
-
-/* ================= SAKURA ================= */
-.sakura{position:fixed;top:-20px;font-size:18px;pointer-events:none;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
-
-/* ================= ENVELOPE ================= */
+/* ENVELOPE */
 #envelope{
 position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
-background:rgba(255,105,180,.25);z-index:10;
+background:linear-gradient(135deg,#ff9aaf,#ffcad4);
+z-index:10;transition:.8s;
 }
-
 .envelope{
-width:320px;height:210px;position:relative;cursor:pointer;
-perspective:1200px;animation:float 3s ease-in-out infinite;
-filter:drop-shadow(0 20px 40px rgba(255,77,166,.5));
+width:280px;height:180px;background:#fff;border-radius:14px;
+display:flex;justify-content:center;align-items:center;
+box-shadow:0 20px 40px rgba(0,0,0,.25);
+cursor:pointer;animation:float 2s infinite alternate;
 }
-
-
-.envelope:hover{
-filter:
- drop-shadow(0 0 20px #ff6fb5)
- drop-shadow(0 0 45px rgba(255,105,180,.9));
-transform:scale(1.03);
-}
-
-
-.envelope .back{
-position:absolute;inset:0;border-radius:20px;
-background:linear-gradient(145deg,#ffd6e9,#ffb6d5);
-}
-
-.envelope .flap{
-position:absolute;top:0;left:0;width:100%;height:100%;
-background:linear-gradient(145deg,#ff9ac7,#ff6fb5);
-clip-path:polygon(0 0,100% 0,50% 62%);
-transform-origin:top;transition:1s;border-radius:20px;
-}
-
-.envelope .front{
-position:absolute;bottom:0;left:0;width:100%;height:65%;
-border-radius:0 0 20px 20px;
-background:linear-gradient(145deg,#ffe3f1,#ffc1da);
-z-index:4;
-}
-
-.envelope .label{
-position:absolute;bottom:55px;width:100%;text-align:center;
-font-size:1.4rem;color:#ff2f92;z-index:5;pointer-events:none;
-transition:.5s;
-}
-
-.envelope.open .flap{transform:rotateX(180deg)}
-.envelope.open .label{opacity:0}
-
+.envelope span{font-size:1.6rem;color:#ff4d6d}
 @keyframes float{to{transform:translateY(-12px)}}
 .hide{opacity:0;pointer-events:none}
 
-/* ================= MAIN ================= */
-.container{display:none;text-align:center;padding:20px;max-width:360px}
-h1{font-size:2.3rem;color:#ff2f92;text-shadow:0 0 15px rgba(255,105,180,.6)}
-h2{font-size:1.1rem;margin-bottom:15px;color:#ff5fb3}
+/* MAIN */
+.container{display:none;text-align:center;padding:20px;max-width:360px;color:#ff4d6d}
+h1{font-size:2.2rem}
+h2{font-size:1.1rem;margin-bottom:15px}
 
 .slideshow{
-width:100%;height:200px;border-radius:22px;overflow:hidden;
-margin-bottom:20px;
-box-shadow:0 12px 30px rgba(255,77,166,.35);
+width:100%;height:200px;border-radius:20px;overflow:hidden;
+margin-bottom:20px;box-shadow:0 10px 25px rgba(0,0,0,.15)
 }
-
 .slideshow img{width:100%;height:100%;object-fit:cover;display:none}
 .slideshow img.active{display:block}
 
 .buttons{position:relative;height:150px}
-button{border:none;border-radius:50px;padding:14px 30px;font-size:1.2rem;cursor:pointer;transition:.3s}
-#yesBtn{
-background:linear-gradient(135deg,#ff2f92,#ff6fb5);
-color:#fff;box-shadow:0 8px 20px rgba(255,47,146,.45)
+button{
+border:none;border-radius:50px;padding:14px 30px;
+font-size:1.2rem;cursor:pointer;transition:.3s
 }
-
+#yesBtn{background:#ff4d9d;color:#fff}
 #noBtn{
-background:#fff;color:#ff4da6;
+background:#fff;color:#ff4d6d;
 position:absolute;left:50%;top:80px;
-transform:translateX(-50%);
-box-shadow:0 6px 16px rgba(255,105,180,.35)
+transform:translateX(-50%)
 }
 
-
-.message{
-display:none;font-size:1.7rem;margin-top:20px;
-color:#ff2f92;
-animation:fadeUp 1s ease forwards
-}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-
-#countdown{display:none;margin-top:25px;font-size:1.8rem;color:#ff2f92;animation:pulse 1.5s infinite;text-shadow:0 0 12px #ff9ad5}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
-
+/* MESSAGE & LINKS */
+.message{display:none;font-size:1.6rem;margin-top:20px;color:#fff}
 .links{display:none;margin-top:15px}
-.links a{display:block;background:#fff;color:#ff4da6;padding:12px;border-radius:30px;margin:8px 0;text-decoration:none}
+.links a{
+display:block;background:#fff;color:#ff4d9d;
+padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
+}
+
+/* COUNTDOWN PULSE + GLOW */
+#countdown{
+display:none;
+margin-top:25px;
+font-size:1.8rem;
+color:#fff;
+animation:pulse 1.5s infinite;
+text-shadow:
+0 0 10px #ff9ad5,
+0 0 20px #ff4d9d,
+0 0 40px #ff1f8f;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.15)}
+100%{transform:scale(1)}
+}
+
+/* EFFECTS */
+.ring{position:fixed;font-size:64px;animation:ring 1.2s ease forwards}
+@keyframes ring{
+0%{transform:scale(.2);opacity:0}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+.heart,.confetti{
+position:fixed;top:-20px;font-size:22px;
+animation:fall linear forwards;pointer-events:none
+}
+.confetti{color:gold}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
 </style>
 </head>
 
-<body class="dim">
+<body>
 
-<!-- ENVELOPE -->
 <div id="envelope">
   <div class="envelope" id="openEnvelope">
-    <div class="back"></div>
-    <div class="flap"></div>
-    <div class="front"></div>
-    <div class="label">💌 Open Invitation</div>
+    <span>💌 Open Invitation</span>
   </div>
 </div>
 
@@ -157,10 +130,16 @@ animation:fadeUp 1s ease forwards
 </div>
 
 <div class="message" id="message"></div>
-<div id="countdown">⏳ <span id="time"></span></div>
+
+<div id="countdown">
+⏳ <span id="time"></span>
+</div>
 
 <div class="links" id="links">
 <a id="waLink" target="_blank">💌 Send Answer via WhatsApp</a>
+<a href="https://maps.app.goo.gl/3QmZFizfKr9QB4eG6" target="_blank">
+📍 Open Date Location
+</a>
 </div>
 </div>
 
@@ -168,57 +147,103 @@ animation:fadeUp 1s ease forwards
 const HER_NAME="Novi Sayanggg";
 const WA_NUMBER="6282190109525";
 
+/* FULLSCREEN */
+function goFull(){
+if(document.documentElement.requestFullscreen)
+document.documentElement.requestFullscreen();
+}
+
+/* OPEN */
 openEnvelope.onclick=()=>{
-openEnvelope.classList.add("open");
-openEnvelope.style.animation='none';
-setTimeout(()=>envelope.classList.add("hide"),1200);
-setTimeout(()=>{
-document.body.classList.remove("dim");
+goFull();
+envelope.classList.add("hide");
 main.style.display="block";
-bgMusic.volume=0;bgMusic.play();
-let v=0;const fade=setInterval(()=>{v+=0.05;bgMusic.volume=Math.min(v,1);if(v>=1)clearInterval(fade)},120);
-},1600);
+bgMusic.play();
 };
 
-
-setInterval(()=>{
-const s=document.createElement("div");
-s.className="sakura";
-s.innerHTML=["🌸","🌷","💮"][Math.floor(Math.random()*3)];
-s.style.left=Math.random()*100+"vw";
-s.style.animationDuration=6+Math.random()*4+"s";
-document.body.appendChild(s);
-setTimeout(()=>s.remove(),10000);
-},400);
-
+/* SLIDESHOW */
 let i=0;
 setInterval(()=>{
-const s=document.querySelectorAll('.slideshow img');
-s[i].classList.remove('active');
-i=(i+1)%s.length;s[i].classList.add('active');
+const s=document.querySelectorAll(".slideshow img");
+s[i].classList.remove("active");
+i=(i+1)%s.length;
+s[i].classList.add("active");
 },2500);
 
+/* NO BUTTON */
 let scale=1;
-noBtn.onclick=()=>{scale-=0.25;noBtn.style.transform=`translateX(-50%) scale(${scale})`;if(scale<=0){noBtn.style.display='none';yesBtn.style.transform='scale(1.3)'}};
+noBtn.onclick=()=>{
+scale-=0.25;
+noBtn.style.transform=`translateX(-50%) scale(${scale})`;
+if(scale<=0){noBtn.style.display="none";yesBtn.style.transform="scale(1.3)";}
+};
 
+/* COUNTDOWN */
 function startCountdown(){
-const target=new Date("2026-02-14T00:00:00").getTime();
-countdown.style.display='block';
-setInterval(()=>{
-const d=target-Date.now();
-if(d<=0){time.innerHTML='💖 OUR MOMENT 💖';return}
-time.innerHTML=`${Math.floor(d/86400000)}d ${Math.floor(d%86400000/3600000)}h ${Math.floor(d%3600000/60000)}m ${Math.floor(d%60000/1000)}s`;
+const targetDate=new Date("2026-02-14T00:00:00").getTime();
+const cd=document.getElementById("countdown");
+const time=document.getElementById("time");
+
+cd.style.display="block";
+
+const timer=setInterval(()=>{
+const now=new Date().getTime();
+const d=targetDate-now;
+
+if(d<=0){
+clearInterval(timer);
+time.innerHTML="💖 OUR MOMENT 💖";
+return;
+}
+
+const days=Math.floor(d/(1000*60*60*24));
+const hours=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((d%(1000*60*60))/(1000*60));
+const seconds=Math.floor((d%(1000*60))/1000);
+
+time.innerHTML=`${days}d ${hours}h ${minutes}m ${seconds}s`;
 },1000);
 }
 
+/* YES BUTTON */
 yesBtn.onclick=()=>{
-document.querySelector('.buttons').style.display='none';
+document.body.classList.add("proposal");
+
+/* HIDE BUTTONS */
+document.querySelector(".buttons").style.display="none";
+
+/* MESSAGE */
 message.innerHTML=`💍 ${HER_NAME}, will you be mine forever? 💖`;
-message.style.display='block';
+message.style.display="block";
+
+/* COUNTDOWN */
 startCountdown();
-links.style.display='block';
-waLink.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20💖`;
+
+/* LINKS */
+links.style.display="block";
+
+/* RING */
+const r=document.createElement("div");
+r.className="ring";r.innerHTML="💍";
+r.style.left="50%";r.style.top="40%";
+document.body.appendChild(r);
+
+/* WHATSAPP */
+waLink.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20I%20accept%20your%20proposal!`;
+setTimeout(()=>window.open(waLink.href,"_blank"),3000);
+
+/* EFFECTS */
+setInterval(()=>{
+const e=document.createElement("div");
+e.className=Math.random()>.5?"heart":"confetti";
+e.innerHTML=Math.random()>.5?"💖":"🎉";
+e.style.left=Math.random()*100+"vw";
+e.style.animationDuration=2+Math.random()*3+"s";
+document.body.appendChild(e);
+setTimeout(()=>e.remove(),5000);
+},120);
 };
 </script>
+
 </body>
 </html>
