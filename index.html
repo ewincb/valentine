@@ -7,98 +7,177 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;font-family:'Pacifico',cursive}
+*{
+box-sizing:border-box;
+font-family:'Pacifico',cursive;
+}
 
+/* ===== ANIME DREAM BACKGROUND ===== */
 body{
-margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
-background:linear-gradient(135deg,#ffd1dc,#ffe6f0);
-overflow:hidden;transition:1s;
+margin:0;height:100vh;
+display:flex;justify-content:center;align-items:center;
+background:
+radial-gradient(circle at top,#ffe6f2,#ffcce0,#ffb3d9);
+overflow:hidden;
+transition:1s;
 }
+
 body.proposal{
-background:radial-gradient(circle at top,#ff9aaf,#ff4d9d,#2b0a1f);
+background:
+radial-gradient(circle at top,#ffd6ec,#ff7eb3,#3b0a2a);
 }
+
+/* ===== TEXT ANIME STYLE ===== */
+h1,h2,.message,#countdown{
+color:#fff;
+text-shadow:
+2px 2px 0 #ff4d9d,
+0 0 15px rgba(255,120,190,.9),
+0 0 30px rgba(255,80,160,.8);
+}
+
+h1{font-size:2.4rem}
+h2{font-size:1.2rem;margin-bottom:15px}
 
 /* ENVELOPE */
 #envelope{
-position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
-background:linear-gradient(135deg,#ff9aaf,#ffcad4);
-z-index:10;transition:.8s;
+position:fixed;inset:0;
+display:flex;justify-content:center;align-items:center;
+background:linear-gradient(135deg,#ff9acb,#ffd1e8);
+z-index:10;
+transition:.8s;
 }
 .envelope{
-width:280px;height:180px;background:#fff;border-radius:14px;
+width:280px;height:180px;
+background:#fff;
+border-radius:16px;
 display:flex;justify-content:center;align-items:center;
-box-shadow:0 20px 40px rgba(0,0,0,.25);
-cursor:pointer;animation:float 2s infinite alternate;
+box-shadow:0 25px 50px rgba(255,120,180,.6);
+cursor:pointer;
+animation:float 2s infinite alternate;
 }
-.envelope span{font-size:1.6rem;color:#ff4d6d}
-@keyframes float{to{transform:translateY(-12px)}}
+.envelope span{font-size:1.6rem;color:#ff4d9d}
+@keyframes float{to{transform:translateY(-14px)}}
 .hide{opacity:0;pointer-events:none}
 
 /* MAIN */
-.container{display:none;text-align:center;padding:20px;max-width:360px;color:#ffffff}
-h1{font-size:2.2rem}
-h2{font-size:1.1rem;margin-bottom:15px}
-
-.slideshow{
-width:100%;height:200px;border-radius:20px;overflow:hidden;
-margin-bottom:20px;box-shadow:0 10px 25px rgba(0,0,0,.15)
+.container{
+display:none;
+text-align:center;
+padding:20px;
+max-width:360px;
 }
-.slideshow img{width:100%;height:100%;object-fit:cover;display:none}
+
+/* SLIDESHOW */
+.slideshow{
+width:100%;height:200px;
+border-radius:22px;
+overflow:hidden;
+margin-bottom:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+.slideshow img{
+width:100%;height:100%;
+object-fit:cover;
+display:none;
+}
 .slideshow img.active{display:block}
 
+/* BUTTONS */
 .buttons{position:relative;height:150px}
 button{
-border:none;border-radius:50px;padding:14px 30px;
-font-size:1.2rem;cursor:pointer;transition:.3s
+border:none;
+border-radius:50px;
+padding:14px 30px;
+font-size:1.2rem;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 8px 20px rgba(255,100,180,.6);
 }
-#yesBtn{background:#ff4d9d;color:#fff}
+#yesBtn{
+background:linear-gradient(135deg,#ff5fa2,#ff2f92);
+color:#fff;
+}
 #noBtn{
-background:#fff;color:#ff4d6d;
-position:absolute;left:50%;top:80px;
-transform:translateX(-50%)
+background:#fff;
+color:#ff4d9d;
+position:absolute;
+left:50%;top:80px;
+transform:translateX(-50%);
 }
 
-/* MESSAGE & LINKS */
-.message{display:none;font-size:1.6rem;margin-top:20px;color:#fff}
-.links{display:none;margin-top:15px}
-.links a{
-display:block;background:#fff;color:#ff4d9d;
-padding:12px;border-radius:30px;margin:8px 0;text-decoration:none
+/* MESSAGE */
+.message{
+display:none;
+font-size:1.7rem;
+margin-top:20px;
 }
 
-/* COUNTDOWN PULSE + GLOW */
+/* COUNTDOWN */
 #countdown{
 display:none;
 margin-top:25px;
-font-size:1.8rem;
-color:#fff;
+font-size:1.9rem;
 animation:pulse 1.5s infinite;
-text-shadow:
-0 0 10px #ff9ad5,
-0 0 20px #ff4d9d,
-0 0 40px #ff1f8f;
 }
-
 @keyframes pulse{
 0%{transform:scale(1)}
 50%{transform:scale(1.15)}
 100%{transform:scale(1)}
 }
 
-/* EFFECTS */
-.ring{position:fixed;font-size:64px;animation:ring 1.2s ease forwards}
+/* LINKS */
+.links{display:none;margin-top:15px}
+.links a{
+display:block;
+background:#fff;
+color:#ff4d9d;
+padding:12px;
+border-radius:30px;
+margin:8px 0;
+text-decoration:none;
+font-size:1.1rem;
+box-shadow:0 6px 18px rgba(0,0,0,.3);
+}
+
+/* ===== EFFECTS ===== */
+.ring{
+position:fixed;
+font-size:64px;
+animation:ring 1.2s ease forwards;
+}
 @keyframes ring{
 0%{transform:scale(.2);opacity:0}
-50%{transform:scale(1.2)}
+50%{transform:scale(1.3)}
 100%{transform:scale(1)}
 }
 
-.heart,.confetti{
-position:fixed;top:-20px;font-size:22px;
-animation:fall linear forwards;pointer-events:none
+.heart,.confetti,.sakura{
+position:fixed;
+top:-40px;
+pointer-events:none;
+z-index:1;
+animation:fallAnime linear forwards;
 }
+
 .confetti{color:gold}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+.sakura{
+font-size:26px;
+filter:drop-shadow(0 0 6px pink);
+}
+
+@keyframes fallAnime{
+0%{
+transform:translateX(0) translateY(0) rotate(0deg);
+}
+50%{
+transform:translateX(40px) translateY(50vh) rotate(180deg);
+}
+100%{
+transform:translateX(-40px) translateY(110vh) rotate(360deg);
+opacity:0;
+}
+}
 </style>
 </head>
 
@@ -131,9 +210,7 @@ animation:fall linear forwards;pointer-events:none
 
 <div class="message" id="message"></div>
 
-<div id="countdown">
-⏳ <span id="time"></span>
-</div>
+<div id="countdown">⏳ <span id="time"></span></div>
 
 <div class="links" id="links">
 <a id="waLink" target="_blank">💌 Send Answer via WhatsApp</a>
@@ -148,14 +225,8 @@ const HER_NAME="Novi Sayanggg";
 const WA_NUMBER="6282190109525";
 
 /* FULLSCREEN */
-function goFull(){
-if(document.documentElement.requestFullscreen)
-document.documentElement.requestFullscreen();
-}
-
-/* OPEN */
 openEnvelope.onclick=()=>{
-goFull();
+document.documentElement.requestFullscreen();
 envelope.classList.add("hide");
 main.style.display="block";
 bgMusic.play();
@@ -175,32 +246,29 @@ let scale=1;
 noBtn.onclick=()=>{
 scale-=0.25;
 noBtn.style.transform=`translateX(-50%) scale(${scale})`;
-if(scale<=0){noBtn.style.display="none";yesBtn.style.transform="scale(1.3)";}
+if(scale<=0){
+noBtn.style.display="none";
+yesBtn.style.transform="scale(1.3)";
+}
 };
 
 /* COUNTDOWN */
 function startCountdown(){
-const targetDate=new Date("2026-02-14T00:00:00").getTime();
-const cd=document.getElementById("countdown");
-const time=document.getElementById("time");
-
-cd.style.display="block";
+const target=new Date("2026-02-14T00:00:00").getTime();
+countdown.style.display="block";
 
 const timer=setInterval(()=>{
 const now=new Date().getTime();
-const d=targetDate-now;
-
+const d=target-now;
 if(d<=0){
 clearInterval(timer);
 time.innerHTML="💖 OUR MOMENT 💖";
 return;
 }
-
 const days=Math.floor(d/(1000*60*60*24));
 const hours=Math.floor((d%(1000*60*60*24))/(1000*60*60));
 const minutes=Math.floor((d%(1000*60*60))/(1000*60));
 const seconds=Math.floor((d%(1000*60))/1000);
-
 time.innerHTML=`${days}d ${hours}h ${minutes}m ${seconds}s`;
 },1000);
 }
@@ -208,41 +276,49 @@ time.innerHTML=`${days}d ${hours}h ${minutes}m ${seconds}s`;
 /* YES BUTTON */
 yesBtn.onclick=()=>{
 document.body.classList.add("proposal");
-
-/* HIDE BUTTONS */
 document.querySelector(".buttons").style.display="none";
 
-/* MESSAGE */
 message.innerHTML=`💍 ${HER_NAME}, will you be mine forever? 💖`;
 message.style.display="block";
 
-/* COUNTDOWN */
 startCountdown();
-
-/* LINKS */
 links.style.display="block";
 
 /* RING */
 const r=document.createElement("div");
-r.className="ring";r.innerHTML="💍";
-r.style.left="50%";r.style.top="40%";
+r.className="ring";
+r.innerHTML="💍";
+r.style.left="50%";
+r.style.top="40%";
 document.body.appendChild(r);
 
 /* WHATSAPP */
 waLink.href=`https://wa.me/${WA_NUMBER}?text=I%20said%20YES%20I%20accept%20your%20proposal!`;
 setTimeout(()=>window.open(waLink.href,"_blank"),3000);
 
-/* EFFECTS */
+/* HEART + CONFETTI */
 setInterval(()=>{
 const e=document.createElement("div");
 e.className=Math.random()>.5?"heart":"confetti";
 e.innerHTML=Math.random()>.5?"💖":"🎉";
 e.style.left=Math.random()*100+"vw";
-e.style.animationDuration=2+Math.random()*3+"s";
+e.style.animationDuration=3+Math.random()*3+"s";
 document.body.appendChild(e);
-setTimeout(()=>e.remove(),5000);
-},120);
+setTimeout(()=>e.remove(),6000);
+},140);
 };
+
+/* 🌸 ANIME SAKURA FALL */
+setInterval(()=>{
+const s=document.createElement("div");
+s.className="sakura";
+s.innerHTML=Math.random()>.5?"🌸":"🌺";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=8+Math.random()*6+"s";
+s.style.fontSize=22+Math.random()*14+"px";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),15000);
+},260);
 </script>
 
 </body>
